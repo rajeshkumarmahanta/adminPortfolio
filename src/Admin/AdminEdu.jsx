@@ -75,7 +75,7 @@ const AdminEdu = () => {
   const handleEducationUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(`${apiUrl}/updateeducation/${updateId}`, {
+      .put(`${apiUrl}/education/update/${updateId}`, {
         educationName,
         collegeName,
         passedYear,
@@ -95,7 +95,7 @@ const AdminEdu = () => {
   };
   const handleEducationDelete = (id) => {
     axios
-      .delete(`${apiUrl}/educationdelete/${id}`)
+      .delete(`${apiUrl}/education/${id}`)
       .then((res) => {
         if (res.data.deletedEdu) {
           toast.error("Skill Deleted !");
@@ -108,7 +108,7 @@ const AdminEdu = () => {
   };
   const fetchSingleEdu = (id) => {
     axios
-      .get(`${apiUrl}/singleeducation/${id}`)
+      .get(`${apiUrl}/education/single/${id}`)
       .then((res) => {
         setPassedYear(res.data.passedYear);
         setEducationName(res.data.name);

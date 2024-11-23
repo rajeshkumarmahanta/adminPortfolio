@@ -11,6 +11,7 @@ const AdminAbout = () => {
   const [id, setId] = useState("");
   const [resume, setResume] = useState(null);
   const [change, setChange] = useState(false);
+  const [resumeId, setResumeId] = useState("");
   useEffect(() => {
     axios
       .get(`${apiUrl}/about`)
@@ -22,6 +23,12 @@ const AdminAbout = () => {
       .catch((err) => {
         console.log(err);
       });
+      axios.get(`${apiUrl}/resume`).then((res)=>{
+        setResumeId(res.data._id);
+        
+      }).catch((err)=>{
+        console.log(err);
+      })
   }, [change]);
 
   const handleAbout = (e) => {
@@ -44,7 +51,7 @@ const AdminAbout = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('resume', resume);
-    axios.post(`${apiUrl}/resume`,formData).then((res)=>{
+    axios.post(`${apiUrl}/resume/${resumeId}`,formData).then((res)=>{
       if (res.data) {
         toast.success("Resume Uploaded !");
         setChange(!change)

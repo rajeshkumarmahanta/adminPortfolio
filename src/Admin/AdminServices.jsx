@@ -49,7 +49,7 @@ const AdminServices = () => {
   };
   const handleServiceUpdate = (e) => {
     e.preventDefault();
-    axios.put(`${apiUrl}/serviceupdate/${updateId}`,{
+    axios.put(`${apiUrl}/service/update/${updateId}`,{
       serviceTitile,
       serviceDesc,
       serviceIcon,
@@ -76,7 +76,7 @@ axios.get(`${apiUrl}/service`).then((res)=>{
 },[change])
 
 const fetchSingleService = (id)=>{
-  axios.get(`${apiUrl}/singleservice/${id}`).then((res)=>{
+  axios.get(`${apiUrl}/service/single/${id}`).then((res)=>{
     setServiceTitle(res.data.title);
     setServiceDesc(res.data.description);
     setServiceIcon(res.data.icon); 
@@ -89,7 +89,7 @@ const fetchSingleService = (id)=>{
 }
 const handleDelete = (id)=>{
   axios
-      .delete(`${apiUrl}/servicedelete/${id}`)
+      .delete(`${apiUrl}/service/${id}`)
       .then((res) => {
         if (res.data.deletedService) {
           toast.error("Service Deleted !");

@@ -1,19 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Home from "./Pages/Home";
-import About from "./Pages/About";
-import Services from "./Pages/Services";
-import Blog from "./Pages/Blog";
-import Contact from "./Pages/Contact";
-import Portfolio from "./Pages/Portfolio";
-import BottonToTop from "./Components/BottonToTop";
-// import Loader from "./Components/Loader";
-import Error from "./Pages/Error";
-import SingleBlog from "./Components/SingleBlog";
-import ServiceReadmore from "./Components/ServiceReadmore";
-import Nav from "./Components/Nav";
-import Footer from "./Components/Footer";
 import Login from "./Admin/Login";
 import AdminHome from "./Admin/AdminHome";
 import AdminAbout from "./Admin/AdminAbout";
@@ -29,8 +16,6 @@ import AdminEdu from "./Admin/AdminEdu";
 import Logout from "./Admin/Logout";
 import ProtectedRoute from "./ProtectedRoute";
 import Admin from './Admin/Admin'
-import ProfileMagic from "./Components/ProfileMagic";
-import Gallery from "./Pages/Gallery";
 import AdminGallery from "./Admin/AdminGallery";
 // import Reg from "./Pages/Reg";
 function App() {
@@ -48,19 +33,6 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        
-        {/* <Route path="/reg" element={<Reg />} /> */}
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/servicereadmore/:id" element={<ServiceReadmore />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/blog/:id" element={<SingleBlog />} />
-        <Route path="/profilemagic/" element={<ProfileMagic />} />
-        <Route path="*" element={<Error />} />
         {/* Admin routes */}
         <Route path="/admin" element={<Login setIsAdmin={setIsAdmin} />} />
         <Route path="/logout" element={<Logout setIsAdmin={setIsAdmin} />} />
@@ -73,6 +45,12 @@ function App() {
         <Route path="/admin/home" element={
             <ProtectedRoute isAdmin={isAdmin}>
               <AdminHome />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/admin/gallery" element={
+            <ProtectedRoute isAdmin={isAdmin}>
+              <AdminGallery />
             </ProtectedRoute>
           }
         />

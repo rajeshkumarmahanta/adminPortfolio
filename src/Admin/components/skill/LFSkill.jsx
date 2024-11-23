@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
+const apiUrl = import.meta.env.VITE_API_URL;
 const LFSkill = () => {
   const [libraryFrameworkRangeValue, setlibraryFrameworkRangeValue] =
     useState(0);
@@ -19,7 +19,7 @@ const LFSkill = () => {
       toast.error("Please fill the text fields !");
       return;
     }
-    axios.post(`http://localhost:3000/libraryFramework`,{LFSkillName,LFSkillDesc,BgColorlibraryFramework,libraryFrameworkRangeValue}).then((res)=>{
+    axios.post(`${apiUrl}/libraryFramework`,{LFSkillName,LFSkillDesc,BgColorlibraryFramework,libraryFrameworkRangeValue}).then((res)=>{
         if (res.data == "skillAlreadyExist") {
             toast.info("Skill Already Exist !");
             return;
@@ -37,7 +37,7 @@ const LFSkill = () => {
   const handleLFUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:3000/updatelibraryframework/${updateId}`, {LFSkillName,LFSkillDesc,BgColorlibraryFramework,libraryFrameworkRangeValue})
+      .put(`${apiUrl}/libraryFramework/update/${updateId}`, {LFSkillName,LFSkillDesc,BgColorlibraryFramework,libraryFrameworkRangeValue})
       .then((res) => {
         if (res.data.acknowledged) {
           toast.success("Updated Success !");
@@ -52,7 +52,7 @@ const LFSkill = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/libraryframework`)
+      .get(`${apiUrl}/libraryFramework`)
       .then((res) => {
         setLFSkills(res.data);
       })
@@ -62,7 +62,7 @@ const LFSkill = () => {
   }, [change]);
   const fetchSingleData = (id) => {
     axios
-      .get(`http://localhost:3000/singlelibraryframework/${id}`)
+      .get(`${apiUrl}/libraryFramework/single/${id}`)
       .then((res) => {
         setlibraryFrameworkRangeValue(res.data.percent);
         setLFSkillName(res.data.name);
@@ -77,7 +77,7 @@ const LFSkill = () => {
   };
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/libraryframeworkdelete/${id}`)
+      .delete(`${apiUrl}/libraryFramework/delete/${id}`)
       .then((res) => {
         if (res.data.deletedLF) {
           toast.error("Skill Deleted !");

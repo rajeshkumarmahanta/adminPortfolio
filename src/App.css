@@ -68,6 +68,8 @@ position: relative;
 .qr-img{
     mix-blend-mode: difference;
 }
+
+
 /* responsive */
 
 @media (max-width: 576px) {

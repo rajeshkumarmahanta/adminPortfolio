@@ -16,7 +16,7 @@ const SocialMedia = () => {
   
   const handleSocialMedia = (e) => {
     e.preventDefault();
-    axios.put(`${apiUrl}/socialmedia/${updateId}`, { instagram, facebook, github, twitter, linkedin }).then((res) => {
+    axios.put(`${apiUrl}/socialMedia/${updateId}`, { instagram, facebook, github, twitter, linkedin }).then((res) => {
       // console.log(res.data);
       if (res.data.acknowledged) {
         toast.success("Updated Success !");
@@ -30,7 +30,7 @@ const SocialMedia = () => {
     })
   }
   useEffect(() => {
-    axios.get(`${apiUrl}/socialmedia`).then((res) => {
+    axios.get(`${apiUrl}/socialMedia`).then((res) => {
       console.log(res.data);
       setInstagram(res.data.instagram);
       setFacebook(res.data.facebook);

@@ -11,7 +11,7 @@ const AdminHome = () => {
   const [change, setChange] = useState(false);
     const handleHome = (e)=>{
             e.preventDefault();
-            axios.put(`${apiUrl}/homeupdate/${updateID}`,{homeText}).then((res)=>{
+            axios.put(`${apiUrl}/home/update/${updateID}`,{homeText}).then((res)=>{
              if(res.data.acknowledged){
              toast.success("Updated Success !");
              setChange(!change)

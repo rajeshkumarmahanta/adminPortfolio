@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard'
 import Footer from './components/Footer'
 import  AdminNav from './components/AdminNav'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 const apiUrl = import.meta.env.VITE_API_URL;
 const AdminDashboard = () => {
   const[blog,setBlog] = useState(0);
@@ -11,6 +12,7 @@ const AdminDashboard = () => {
   const[service,setService] = useState(0);
   const[message,setMessage] = useState(0);
   useEffect(() => {
+    toast.info("Hello Wellcome Admin");
     axios.get(`${apiUrl}/blog`).then((res) => {
       // console.log(res.data);
       setBlog(res.data.length);

@@ -42,7 +42,7 @@ const AdminPortfolio = () => {
 
   const handleProjectUpdate = (e)=>{
     e.preventDefault();
-    axios.put(`${apiUrl}/projectupdate/${updateId}`,{projectTitle,projectDesc,projectUrl,projectTech}).then((res)=>{
+    axios.put(`${apiUrl}/project/update/${updateId}`,{projectTitle,projectDesc,projectUrl,projectTech}).then((res)=>{
       if (res.data.acknowledged) {
         toast.success("Updated Success !");
         setChange(!change)
@@ -55,7 +55,7 @@ const AdminPortfolio = () => {
     })
   }
   const fetchSingleProject = (id)=>{
-    axios.get(`${apiUrl}/singleproject/${id}`).then((res)=>{
+    axios.get(`${apiUrl}/project/single/${id}`).then((res)=>{
       setProjectTitle(res.data.title);
       setProjectDesc(res.data.description);
       setProjectUrl(res.data.url); 
@@ -68,7 +68,7 @@ const AdminPortfolio = () => {
   }
   const handleDelete = (id)=>{
     axios
-    .delete(`${apiUrl}/projectdelete/${id}`)
+    .delete(`${apiUrl}/project/${id}`)
     .then((res) => {
       if (res.data.deletedProject) {
         toast.error("Project Deleted !");

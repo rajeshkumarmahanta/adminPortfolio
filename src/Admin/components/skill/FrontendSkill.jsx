@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { toast } from 'react-toastify';
+const apiUrl = import.meta.env.VITE_API_URL;
 const FrontendSkill = () => {
   // frontend states
   const [frontendRangeValue, setfrontendRangeValue] = useState(0);
@@ -16,7 +17,7 @@ const FrontendSkill = () => {
       toast.error("Please fill the text fields !");
       return;
     }
-    axios.post(`http://localhost:3000/frontend`, { frontendRangeValue, BgColorfrontend, FSkillName, FSkillDesc }).then((res) => {
+    axios.post(`${apiUrl}/frontend`, { frontendRangeValue, BgColorfrontend, FSkillName, FSkillDesc }).then((res) => {
       if (res.data == "skillAlreadyExist") {
         toast.info("Skill Already Exist !");
         return;
@@ -39,7 +40,7 @@ const FrontendSkill = () => {
 
   // fetch data
   useEffect(() => {
-    axios.get(`http://localhost:3000/frontend`).then((res) => {
+    axios.get(`${apiUrl}/frontend`).then((res) => {
       setFrontendSkills(res.data);
     }).catch((err) => {
       console.log(err)
@@ -48,7 +49,7 @@ const FrontendSkill = () => {
   }, [change]);
 
   const fetchSingleData = (id) => {
-    axios.get(`http://localhost:3000/singlefrontend/${id}`).then((res) => {
+    axios.get(`${apiUrl}/frontend/single/${id}`).then((res) => {
       setfrontendRangeValue(res.data.percent);
       setFSkillName(res.data.name);
       setFSkillDesc(res.data.description);
@@ -61,7 +62,7 @@ const FrontendSkill = () => {
   }
   const handleUpdate = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3000/updatefrontend/${updateId}`, { frontendRangeValue, BgColorfrontend, FSkillName, FSkillDesc }).then((res) => {
+    axios.put(`${apiUrl}/frontend/update/${updateId}`, { frontendRangeValue, BgColorfrontend, FSkillName, FSkillDesc }).then((res) => {
       if (res.data.acknowledged) {
         toast.success("Updated Success !");
         setChange(!change)
@@ -78,7 +79,7 @@ const FrontendSkill = () => {
     setupdateId("");
   }
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3000/frontenddelete/${id}`).then((res) => {
+    axios.delete(`${apiUrl}/frontend/delete/${id}`).then((res) => {
       if (res.data.deletedFrontend) {
         toast.error("Skill Deleted !");
         setChange(!change)

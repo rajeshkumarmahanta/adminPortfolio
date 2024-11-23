@@ -50,7 +50,7 @@ const AdminBlog = () => {
   }, [change]);
 
   const fetchSingleBlog = (id) => {
-    axios.get(`${apiUrl}/singleblog/${id}`).then((res) => {
+    axios.get(`${apiUrl}/blog/single/${id}`).then((res) => {
       // console.log(res.data)
       setBlogTitle(res.data.title);
       setBlogDesc(res.data.description);

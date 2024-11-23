@@ -6,6 +6,7 @@ const Login = ({setIsAdmin}) => {
     const [username,setusername] = useState("");
     const [password,setPassword] = useState("");
     const [ErrorMsg,setErrorMsg] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 useEffect(()=>{
     if(localStorage.getItem("admin")){
@@ -16,6 +17,7 @@ useEffect(()=>{
     
     const handleLogin = (e) => {
         e.preventDefault();
+        setIsLoading(true);
             axios.post(`${apiUrl}/admin`,{username,password}).then((res)=>{
                 if(res.data == true){
                     localStorage.setItem("admin",true);
@@ -51,7 +53,7 @@ useEffect(()=>{
                                                 <label htmlFor="inputPassword" className='text-dark'>Password</label>
                                             </div>
                                             <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button className="btn btn-primary w-25 m-auto" type="submit">Login</button>
+                                                <button className="btn btn-primary w-25 m-auto" type="submit" disabled={isLoading}>{isLoading ? 'Loading...' : 'Login'}</button>
                                             </div>
                                         </form>
                                         <div className="">{ErrorMsg? "Invalid credential" : ""}</div>

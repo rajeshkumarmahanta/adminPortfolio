@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useState,useEffect } from 'react';
 import { toast } from 'react-toastify';
+const apiUrl = import.meta.env.VITE_API_URL;
 const BackendSkill = () => {
   const [backendRangeValue, setbackendRangeValue] = useState(0);
   const [BgColorbackend, setBgColorbackend] = useState("" || "#000000");
@@ -11,7 +12,7 @@ const BackendSkill = () => {
   const [backendSkills, setBackendSkills] = useState([]);
   const [change, setChange] = useState(false);
   const fetchSingleData = (id) => {
-    axios.get(`http://localhost:3000/singlebackend/${id}`).then((res) => {
+    axios.get(`${apiUrl}/backend/single/${id}`).then((res) => {
       setbackendRangeValue(res.data.percent);
       setBSkillName(res.data.name);
       setBSkillDesc(res.data.description);
@@ -24,7 +25,7 @@ const BackendSkill = () => {
   }
   const handleBackendUpdate = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:3000/updatebackend/${updateId}`, { backendRangeValue, BgColorbackend, BSkillName, BSkillDesc }).then((res) => {
+    axios.put(`${apiUrl}/backend/update/${updateId}`, { backendRangeValue, BgColorbackend, BSkillName, BSkillDesc }).then((res) => {
       if (res.data.acknowledged) {
         toast.success("Updated Success !");
         setChange(!change)
@@ -41,7 +42,7 @@ const BackendSkill = () => {
     setupdateId("")
   }
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3000/backenddelete/${id}`).then((res) => {
+    axios.delete(`${apiUrl}/backend/delete/${id}`).then((res) => {
       if(res.data.deletedBackend) {
         toast.error("Skill Deleted !");
         setChange(!change)
@@ -56,7 +57,7 @@ const BackendSkill = () => {
       toast.error("Please fill the text fields !");
       return;
     }
-    axios.post(`http://localhost:3000/backend`,{backendRangeValue,BgColorbackend,BSkillName,BSkillDesc}).then((res)=>{
+    axios.post(`${apiUrl}/backend`,{backendRangeValue,BgColorbackend,BSkillName,BSkillDesc}).then((res)=>{
       if (res.data == "skillAlreadyExist") {
         toast.info("Skill Already Exist !");
         return;
@@ -78,7 +79,7 @@ const BackendSkill = () => {
 
   }
   useEffect(() => {
-    axios.get(`http://localhost:3000/backend`).then((res) => {
+    axios.get(`${apiUrl}/backend`).then((res) => {
       setBackendSkills(res.data);
     }).catch((err) => {
       console.log(err)

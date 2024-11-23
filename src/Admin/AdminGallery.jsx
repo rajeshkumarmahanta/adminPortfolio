@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import AdminNav from "./components/AdminNav";
 import Sidemenu from "./components/Sidemenu";
-import Footer from "../Components/Footer";
+import Footer from "./components/Footer";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
 import { toast } from "react-toastify";

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+const apiUrl = import.meta.env.VITE_API_URL;
 const DatabaseSkill = () => {
   const [databaseRangeValue, setdatabaseRangeValue] = useState(0);
   const [BgColordatabase, setBgColordatabase] = useState(" " || "#000000");
@@ -16,7 +17,7 @@ const DatabaseSkill = () => {
       return;
     }
     axios
-      .put(`http://localhost:3000/updatedatabase/${updateId}`, {
+      .put(`${apiUrl}/updatedatabase/${updateId}`, {
         databaseRangeValue,
         BgColordatabase,
         DSkillName,
@@ -42,7 +43,7 @@ const DatabaseSkill = () => {
   const handleDBSkill = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3000/database`, {
+      .post(`${apiUrl}/database`, {
         databaseRangeValue,
         BgColordatabase,
         DSkillName,
@@ -71,7 +72,7 @@ const DatabaseSkill = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/database`)
+      .get(`${apiUrl}/database`)
       .then((res) => {
         setDatabaseSkills(res.data);
       })
@@ -81,7 +82,7 @@ const DatabaseSkill = () => {
   }, [change]);
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3000/databasedelete/${id}`)
+      .delete(`${apiUrl}/databasedelete/${id}`)
       .then((res) => {
         if (res.data.deletedDatabase) {
           toast.error("Skill Deleted !");
@@ -95,7 +96,7 @@ const DatabaseSkill = () => {
 
   const fetchSingleData = (id) => {
     axios
-      .get(`http://localhost:3000/singledatabase/${id}`)
+      .get(`${apiUrl}/singledatabase/${id}`)
       .then((res) => {
         setdatabaseRangeValue(res.data.percent);
         setDSkillName(res.data.name);

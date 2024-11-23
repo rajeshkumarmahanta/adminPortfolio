@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-axios;
+const apiUrl = import.meta.env.VITE_API_URL;
 const Other = () => {
   const [othertoolRangeValue, setothertoolRangeValue] = useState(0);
   const [BgColorothertool, setBgColorothertool] = useState("" || "#000000");
@@ -18,7 +18,7 @@ const Other = () => {
     }
 
     axios
-      .post(`http://localhost:3000/otherskill`, {
+      .post(`${apiUrl}/other`, {
         othertoolRangeValue,
         BgColorothertool,
         otherSkillName,
@@ -48,7 +48,7 @@ const Other = () => {
   const handleOtherSkillUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:3000/updateotherskill/${updateId}`,{
+      .put(`${apiUrl}/other/update/${updateId}`,{
         othertoolRangeValue,
         BgColorothertool,
         otherSkillName,
@@ -68,7 +68,7 @@ const Other = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/otherskill`)
+      .get(`${apiUrl}/other`)
       .then((res) => {
         setOtherSkills(res.data);
       })
@@ -78,7 +78,7 @@ const Other = () => {
   }, [change]);
   const handleDelete = (id)=>{
     axios
-      .delete(`http://localhost:3000/otherskilldelete/${id}`)
+      .delete(`${apiUrl}/other/delete/${id}`)
       .then((res) => {
         if (res.data.deletedOther) {
           toast.error("Skill Deleted !");
@@ -91,7 +91,7 @@ const Other = () => {
   }
   const fetchSingleData = (id) => {
     axios
-      .get(`http://localhost:3000/singleotherskill/${id}`)
+      .get(`${apiUrl}/other/single/${id}`)
       .then((res) => {
         setothertoolRangeValue(res.data.percent);
         setotherSkillName(res.data.name);
